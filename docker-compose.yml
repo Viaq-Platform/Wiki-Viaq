@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: wikijs-db
+    environment:
+      POSTGRES_DB: wikijs
+      POSTGRES_PASSWORD: '!Vi_aQ@14008175905!'
+      POSTGRES_USER: wikijs
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - viaq-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wikijs -d wikijs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wiki:
+    image: docker.arvancloud.ir/requarks/wiki:2    # استفاده از تصویر دانلود شده از میرور ایرانی
+    container_name: wikijs-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: '!Vi_aQ@14008175905!'
+      DB_NAME: wikijs
+      PUBLIC_URI: http://wiki.viaq.ir
+    volumes:
+      - ./data:/wiki/data
+      - ./config.yml:/wiki/config.yml:ro
+      - /var/www/Wiki-Viaq/src:/wiki-data:ro
+
+    ports:
+      - "3200:3000"
+    restart: unless-stopped
+    networks:
+      - viaq-network
+
+volumes:
+  db-data:
+
+networks:
+  viaq-network:
+    external: true

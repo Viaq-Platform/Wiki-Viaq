@@ -1,5 +1,11 @@
+# Datas
 db-data/
 data/
-node_modules/
+
+# Envirment
 *.env
 !.env.example
+
+# Logs
+logs/
+*.log

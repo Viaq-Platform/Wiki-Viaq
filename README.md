@@ -68,8 +68,8 @@ WikiViaq is the platform behind this wiki. It is built on **Wiki.js** (v2.5.314)
 
 ## Next Steps
 
-- See [Setup Guide](setup.md) for initial installation from scratch.
-- See [API Token Guide](api-token.md) for generating and using API tokens.
+- See [Setup Guide](src/en/DevOps/handbook/WikiViaq/setup.md) for initial installation from scratch.
+- See [API Token Guide](src/en/DevOps/handbook/WikiViaq/api-token.md) for generating and using API tokens.
 
 ---
 
